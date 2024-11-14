@@ -1,14 +1,13 @@
 /*
 #### Preamble ####
 Purpose: Summarise the sql data
-Author: David Qi
+Author: Haobo Ren
 Date: 14 Nov 2024
-Contact: david.qi@mail.utoronto.ca
+Contact: haobo.ren@mail.utoronto.ca
 License: MIT
 Pre-requisites: NA
 Any other information needed? Make sure you are in the `starter_folder` rproj
 */
-
 
 WITH
 	uniquedates AS (
@@ -31,4 +30,6 @@ WITH
 		stats
 	INNER JOIN
 		product
-	ON stats.product_id = product.id;
+	ON stats.product_id = product.id
+	WHERE product_name LIKE '%green tea%'  OR product_name LIKE '%greentea%' 
+	ORDER BY _count DESC;
