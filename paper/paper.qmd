@@ -1,0 +1,66 @@
+---
+title: "Analysing the 2024 U.S. Presidential Election"
+subtitle: "Spotlight on North Carolina's Role as a Battleground State"
+author: 
+  - David Qi
+  - Haobo Ren
+thanks: "Code and data are available at: https://"
+date: today
+date-format: long
+abstract: ""
+format: pdf
+number-sections: true
+toc: true
+bibliography: references.bib
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+```
+
+
+# Introduction {#sec-intro}
+
+
+
+
+
+# Data {#sec-data}
+
+
+```{r}
+#| label: tbl-polloverview
+#| tbl-cap: Comparison of average polling result for two candiates
+#| include: true
+#| echo: false
+#| warning: false
+#| message: false
+
+merged_summary = merged_summary %>% select(state,total_count.x,mean_pct_harris,mean_pct_trump,abs_diff)  %>% arrange(abs_diff)
+
+kable(merged_summary, col.names = c("State", "Number of Polls" , "Average Support Rate(Harris)","Average Support Rate(Trump)","Absolute difference"))
+```
+ 
+# Results {#sec-results}
+
+
+# Discussion{#sec-discussion}
+
+
+\newpage
+
+\appendix
+
+
+\newpage
+
+# References
+
+
+

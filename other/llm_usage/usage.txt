@@ -1,0 +1,10 @@
+LLM: ChatGPT-4o
+Date: 04 November 2024
+
+
+User
+how to round number in R
+
+ChatGPT-4o
+In R, you can use several functions to
+-crafted title not only captures 
