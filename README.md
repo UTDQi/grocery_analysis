@@ -1,4 +1,4 @@
-# Analysing the 2024 U.S. Presidential Election: Spotlight on North Carolina's Role as a Battleground State
+# Pricing Approaches for Green Tea Products: A Study of Canadian Grocery Retailers
 
 ## Overview
 This repository is conducted by R and SQL, including all necessary code, data and analysis for analysis on Canadian Grocery Price Data
