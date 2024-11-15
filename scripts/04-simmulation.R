@@ -18,23 +18,18 @@ set.seed(1009201917)
 # Number of records to simulate
 n <- 100
 
-# Define unique product names, vendors, and other attributes based on the sample
-product_names <- c("TRADITION JASMINE GREEN TEA", "HAPPY CLOVER SWISS ROLL CAKE GREEN TEA 200G", 
-                   "Dmdq Green Tea (250g)", "LOTTE CHOCOPIE GREEN TEA 336G", 
-                   "GOLDEN BONBON GREEN TEA NOUGAT 454G", "EVERGREEN BUBBLE MILK TEA GREEN TEA 480ML", 
-                   "CHORIPDONG ROASTED GRAIN POWDER WITH GREEN TEA 1KG", "HIME GREEN TEA NOODLE 640G", 
-                   "AOI CHA SOBA DRIED BUCKWHEAT GREENTEA NOODLE 240G", "AOI SOMEN DRIED THIN GREENTEA NOODLE 240G")
-
-vendors <- c("TandT", "Galleria")
+tea_summary <- read_csv("~/grocery_new/data/02-analysis_data/tea_summary.csv")
+product_names <- unique(tea_summary$product_name)
+vendors <- unique(tea_summary$vendor)
+brands <- unique(tea_summary$brand[!is.na(tea_summary$brand)])
 
 # Simulating the data
 simulated_data <- tibble(
   vendor = sample(vendors, size = n, replace = TRUE),  # Random vendors
   product_name = sample(product_names, size = n, replace = TRUE),  # Random product names from the list
-  units = sample(c("EA", "BX", "KG", "G"), size = n, replace = TRUE),  # Random unit types
-  current_price = runif(n, min = 1, max = 20),  # Random prices between 1 and 20
-  previous_price = runif(n, min = 1, max = 20),  # Random previous prices between 1 and 20
-  price_difference = runif(n, min = 1, max = 10),  # Random price differences
+  brand = sample(brands, size = n, replace = TRUE),  # Random brand from the list
+  min_price = runif(n, min = 1, max = 20),  # Random prices between 1 and 20
+  max_price = min_price + runif(n, min = 0, max = 10),  # Ensure max_price is at least min_price
   stock = sample(100:500, size = n, replace = TRUE)  # Random stock count
 )
 

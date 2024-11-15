@@ -5,38 +5,49 @@
 # Contact: sakura.hu@mail.utoronto.ca
 # License: MIT
 
-
-# Load necessary libraries
-library(testthat)
+#### Workspace setup ####
 library(tidyverse)
 
-# Read the simulated data
+# Load the simulated data
 simulated_data <- read_csv("data/simmulated_data/simulated.csv")
+tea_summary <- read_csv("~/grocery_new/data/02-analysis_data/tea_summary.csv")
 
-#### Test for correct structure ####
+#### Test data ####
 
-# Test 1: Check if the data contains the expected columns
-test_that("Simulated data has the expected columns", {
-  expected_columns <- c("vendor", "product_name", "units", "current_price", "previous_price", "price_difference", "stock")
-  
-  # Check if all expected columns are present
-  expect_true(all(expected_columns %in% colnames(simulated_data)), 
-              info = "Some expected columns are missing from the data")
-})
+# 1. Check for missing values (NAs) in key columns
+na_checks <- sapply(simulated_data, function(x) sum(is.na(x)))
+print("Number of NAs in each column:")
+print(na_checks)
 
-#### Test for missing data ####
+# 2. Check that 'vendor', 'product_name', and 'brand' columns are character type
+is_character <- sapply(simulated_data[, c("vendor", "product_name", "brand")], is.character)
+print("Are 'vendor', 'product_name', and 'brand' character types:")
+print(is_character)
 
-# Test 2: Check for missing values in important columns like 'current_price' and 'product_name'
-test_that("Data contains no missing values", {
-  expect_equal(sum(is.na(simulated_data$current_price)), 0, info = "There are missing values in current_price")
-  expect_equal(sum(is.na(simulated_data$product_name)), 0, info = "There are missing values in product_name")
-})
+# 3. Check that 'min_price', 'max_price', and 'stock' columns are numeric type
+is_numeric <- sapply(simulated_data[, c("min_price", "max_price", "stock")], is.numeric)
+print("Are 'min_price', 'max_price', and 'stock' numeric types:")
+print(is_numeric)
 
-#### Test for numeric prices ####
+# 4. Check for duplicate rows
+duplicate_rows <- any(duplicated(simulated_data))
+print(paste("There are duplicate rows in the dataset:", duplicate_rows))
 
-# Test 3: Ensure that 'current_price' and 'previous_price' are numeric
-test_that("Prices are numeric", {
-  expect_true(is.numeric(simulated_data$current_price), info = "current_price is not numeric")
-  expect_true(is.numeric(simulated_data$previous_price), info = "previous_price is not numeric")
-})
+# 5. Check that 'min_price' is less than or equal to 'max_price' for all rows
+min_less_equal_max <- all(simulated_data$min_price <= simulated_data$max_price)
+print(paste("All min_price values are less than or equal to max_price:", min_less_equal_max))
 
+# 6. Ensure that vendor names are within expected list
+expected_vendors <- unique(tea_summary$vendor)
+valid_vendors <- all(simulated_data$vendor %in% expected_vendors)
+print(paste("All vendor names are valid:", valid_vendors))
+
+# 7. Ensure that product names are within expected list
+expected_pn <- unique(tea_summary$product_name)
+valid_product_name <- all(simulated_data$product_name %in% expected_pn)
+print(paste("All product names are valid:", valid_product_name))
+
+# 6. Ensure that brand are within expected list
+expected_brands <- unique(tea_summary$brand)
+valid_brands <- all(simulated_data$brand %in% expected_brands)
+print(paste("All brand names are valid:", valid_brands))
