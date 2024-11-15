@@ -33,3 +33,6 @@ WITH
 	ON stats.product_id = product.id
 	WHERE product_name LIKE '%green tea%'  OR product_name LIKE '%greentea%' 
 	ORDER BY days_with_price_data DESC;
+	
+/* remember to save to .csv after executing */
+	

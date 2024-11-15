@@ -20,3 +20,5 @@ SELECT nowtime, vendor, product_id, product_name, brand, current_price, old_pric
 		(product.product_name LIKE '%green tea%' OR product.product_name LIKE '%greentea%')
 		AND product.brand LIKE '%lipton%' AND product.product_name LIKE '%ginseng%' AND product.product_name LIKE '%Lemon%'
 		And raw.current_price IS NOT NULL;
+		
+/* remember to save to .csv after executing */
