@@ -1,4 +1,4 @@
-id,vendor,product_name,units,brand,_max,_min,_avg,_count
+id,vendor,product_name,units,brand,max_price,min_price,avg_price,days_with_price_data
 3683527,TandT,TRADITION JASMINE GREEN TEA,,,8.24,13.99,9.49084951456311,412
 920289,Galleria,HAPPY CLOVER SWISS ROLL CAKE GREEN TEA 200G,EA,,6.99,5.98,6.18867768595041,242
 3683538,TandT,Dmdq Green Tea (250g),250g,,8.79,5.18,7.91755555555556,180

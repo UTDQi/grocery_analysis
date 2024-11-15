@@ -18,18 +18,18 @@ WITH
 	
 	stats AS (
 		SELECT
-			*, MAX(current_price) as _max, MIN(current_price) as _min, AVG( current_price ) as _avg, COUNT( current_price ) as _count
+			*, MAX(current_price) as max_price, MIN(current_price) as min_price, AVG(current_price) as avg_price, COUNT(current_price) as days_with_price_data
 		FROM
 			uniquedates
 		GROUP BY
 			product_id)
 			
 	SELECT
-		product.id,product.vendor,product.product_name,product.units,product.brand, stats._max, stats._min, stats._avg, stats._count
+		product.id,product.vendor,product.product_name,product.units,product.brand, stats.max_price, stats.min_price, stats.avg_price, stats.days_with_price_data
 	FROM
 		stats
 	INNER JOIN
 		product
 	ON stats.product_id = product.id
 	WHERE product_name LIKE '%green tea%'  OR product_name LIKE '%greentea%' 
-	ORDER BY _count DESC;
+	ORDER BY days_with_price_data DESC;
