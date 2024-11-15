@@ -33,6 +33,11 @@ library(ggplot2)
 
 # Data {#sec-data}
 
+## Mesurement
+The data used in this paper were obtained from the websites of various food retail companies, including Voila, T&T, Loblaws, No Frills, Metro, Galleria, Walmart Canada, Save-On-Foods. The data was gathered by using screen-scrape of website UI, starting from Feb.28 to Nov.14. This data captures the product name, units, and prices of each vendors.
+
+This data has some limitations. There maybe missing data on certain days for certain vendors, days on which those specific extracts failed. This data didn't include all vendors in the markets, it may cause bias to our analysis.
+
 
 ```{r}
 #| label: tbl-polloverview
