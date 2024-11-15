@@ -4,7 +4,10 @@ subtitle: "Spotlight on North Carolina's Role as a Battleground State"
 author: 
   - David Qi
   - Haobo Ren
-thanks: "Code and data are available at: https://"
+  - Xinrui Xie
+  - Ruikang Wang
+  - Sakura Hu
+thanks: "Code and data are available at: https://github.com/UTDQi/grocery_analysis"
 date: today
 date-format: long
 abstract: ""
@@ -22,7 +25,14 @@ bibliography: references.bib
 library(tidyverse)
 library(knitr)
 library(ggplot2)
+library(janitor)
+
+
+tea_summary = read_csv(here::here("data/02-analysis_data/tea_summary.csv"))
+
+price_change = read_csv(here::here("data/02-analysis_data/price_change_lemon_ginseng.csv"))
 ```
+
 
 
 # Introduction {#sec-intro}
@@ -31,25 +41,73 @@ library(ggplot2)
 
 
 
+
 # Data {#sec-data}
 
 ## Mesurement
-The data used in this paper were obtained from the websites of various food retail companies, including Voila, T&T, Loblaws, No Frills, Metro, Galleria, Walmart Canada, Save-On-Foods. The data was gathered by using screen-scrape of website UI, starting from Feb.28 to Nov.14. This data captures the product name, units, and prices of each vendors.
+The data used in this paper were obtained from the websites of various food retail companies, including Voila, T&T, Loblaws, No Frills, Metro, Galleria, Walmart Canada, Save-On-Foods. The data was gathered by using screen-scrape of website UI, starting from Feb.28 to Nov.14. This data captures the product name, units, and prices of each vendors. [@raw_data_source]
 
-This data has some limitations. There maybe missing data on certain days for certain vendors, days on which those specific extracts failed. This data didn't include all vendors in the markets, it may cause bias to our analysis.
+This data has some limitations. There are missing data on certain days for certain vendors,some missing points occur on days which those specific extracts failed. While data collection for some products starts form July. This data didn't include all vendors in the markets, which may cause bias to our analysis.
+
+## Key Observation Variables
+
+### Current Time
+The current time(`current_price`) is the time when this data is retrieved.
+
+### Current Price
+The current price(`current_price`) is the price of the product retrieved at the time accessed.
+
+### Old Price
+The current price(`old_price`) is the "old price" of the product retrieved at the time accessed that is stuck out by the vendor. It appears whenever there is a sales on and the vendor wants to show the change in price. This is the key variable to differentiate between sale and silent price drops. 
+
+## Overview
+[@fig-PriceVsVendor] is a graph
 
 
 ```{r}
-#| label: tbl-polloverview
-#| tbl-cap: Comparison of average polling result for two candiates
+#| label: fig-PriceVsVendor
+#| fig-cap: Distribution of Average Prices by Vendor
 #| include: true
 #| echo: false
 #| warning: false
 #| message: false
 
-merged_summary = merged_summary %>% select(state,total_count.x,mean_pct_harris,mean_pct_trump,abs_diff)  %>% arrange(abs_diff)
+tea_summary = clean_names(tea_summary)
 
-kable(merged_summary, col.names = c("State", "Number of Polls" , "Average Support Rate(Harris)","Average Support Rate(Trump)","Absolute difference"))
+ggplot(tea_summary, aes(x = avg_price, fill = vendor)) +
+  geom_histogram(binwidth = 1, alpha = 0.7) +
+  labs(
+       x = "Average Price",
+       y = "Count") +
+  facet_wrap(~ vendor, scales = "free_y") +
+  theme(
+    legend.position = "none", 
+    plot.margin = margin(t = 15, r = 15, b = 20, l = 15)  # Increase bottom margin
+  )
+```
+
+
+```{r}
+#| label: fig-ChangeInGinsengLemon
+#| fig-cap: Price Change of Lipton Ginseng Lemon Green Tea 72 Counts
+#| include: true
+#| echo: false
+#| warning: false
+#| message: false
+
+price_change = clean_names(price_change)
+
+# Ensure `nowtime` is in datetime format and `current_price` is numeric
+price_change$nowtime <- as.POSIXct(price_change$nowtime)
+price_change$current_price <- as.numeric(price_change$current_price)
+
+# Sample ggplot code to create the point graph
+ggplot(price_change, aes(x = nowtime, y = current_price, color = vendor)) +
+  geom_point(alpha = 0.6) +
+  labs(x = "Time(Month)",
+       y = "Current Price",
+       color = "Vendor") +
+  theme_minimal() 
 ```
  
 # Results {#sec-results}
@@ -57,6 +115,11 @@ kable(merged_summary, col.names = c("State", "Number of Polls" , "Average Suppor
 
 # Discussion{#sec-discussion}
 
+## Correlation Versus Causation
+
+## Missing Data
+
+## Sources of Bias.
 
 \newpage
 
