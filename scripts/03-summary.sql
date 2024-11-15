@@ -25,7 +25,7 @@ WITH
 			product_id)
 			
 	SELECT
-		product.id,product.vendor,product.product_name,product.units,product.brand, stats.max_price, stats.min_price, stats.avg_price, stats.days_with_price_data
+		product.id,product.vendor,product.product_name, stats.max_price, stats.min_price, stats.avg_price, stats.days_with_price_data
 	FROM
 		stats
 	INNER JOIN

@@ -11,8 +11,7 @@ Any other information needed? Make sure you are in the `starter_folder` rproj
 
 
 
-
-SELECT nowtime, vendor, product_id, product_name, brand, current_price, old_price, units, price_per_unit, other, brand, units
+SELECT nowtime, vendor, product_id, product_name, brand, current_price, old_price, units
 	FROM raw 
 	INNER JOIN product 
 	ON raw.product_id = product.id 
