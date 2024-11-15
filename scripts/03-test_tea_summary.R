@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data
+# Purpose: Tests tea_summary data
 # Author: Group15
 # Date: 14 October 2024
 # Contact: sakura.hu@mail.utoronto.ca
@@ -9,7 +9,7 @@
 library(tidyverse)
 
 # Load the simulated and analysis data
-simulated_data <- read_csv("data/00-simulated_data/simulated_data.csv")
+simulated_data <- read_csv("data/00-simulated_data/simulated_tea_summary.csv")
 tea_summary <- read_csv("~/grocery_new/data/02-analysis_data/tea_summary.csv")
 
 #### Test simulated data ####
@@ -91,4 +91,3 @@ print(paste("All vendor names are valid:", valid_vendors))
 expected_pn <- unique(tea_summary$product_name)
 valid_product_name <- all(tea_summary$product_name %in% expected_pn)
 print(paste("All product names are valid:", valid_product_name))
-

@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Simulates data for Hate Crimes analysis
+# Purpose: Simulates tea_summary data
 # Author: Group 15
 # Date: 14 November 2024
 # Contact: sakura.hu@mail.utoronto.ca
@@ -23,19 +23,23 @@ product_names <- unique(tea_summary$product_name)
 vendors <- unique(tea_summary$vendor)
 
 # Simulating the data
-simulated_data <- tibble(
-  vendor = sample(vendors, size = n, replace = TRUE),  # Random vendors
-  product_name = sample(product_names, size = n, replace = TRUE),  # Random product names from the list
-  min_price = runif(n, min = 1, max = 20),  # Random prices between 1 and 20
-  max_price = min_price + runif(n, min = 0, max = 10),  # Ensure max_price is at least min_price
+simulated_tea_summary <- tibble(
+  vendor = sample(vendors, size = n, replace = TRUE),
+  # Random vendors
+  product_name = sample(product_names, size = n, replace = TRUE),
+  # Random product names from the list
+  min_price = runif(n, min = 1, max = 20),
+  # Random prices between 1 and 20
+  max_price = min_price + runif(n, min = 0, max = 10),
+  # Ensure max_price is at least min_price
   days_with_price_data = sample(100:500, size = n, replace = TRUE)  # Random stock count
 )
 
 # Adding the average price column
-simulated_data <- simulated_data %>%
+simulated_tea_summary <- simulated_tea_summary %>%
   mutate(avg_price = (min_price + max_price) / 2)
 
 # View the simulated data
-head(simulated_data)
+head(simulated_tea_summary)
 
-write_csv(simulated_data, file = "data/00-simulated_data/simulated_data.csv")
+write_csv(simulated_tea_summary, file = "data/00-simulated_data/simulated_tea_summary.csv")
