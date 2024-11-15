@@ -31,6 +31,8 @@ library(janitor)
 tea_summary = read_csv(here::here("data/02-analysis_data/tea_summary.csv"))
 
 price_change = read_csv(here::here("data/02-analysis_data/price_change_lemon_ginseng.csv"))
+
+test = read_csv(here::here("data/02-analysis_data/test_data.csv"))
 ```
 
 
@@ -107,6 +109,31 @@ ggplot(price_change, aes(x = nowtime, y = current_price, color = vendor)) +
   labs(x = "Time(Month)",
        y = "Current Price",
        color = "Vendor") +
+  theme_minimal() 
+```
+
+
+```{r}
+#| label: fig-ChangeInGinsengLemon
+#| fig-cap: Price Change of Lipton Ginseng Lemon Green Tea 72 Counts
+#| include: true
+#| echo: false
+#| warning: false
+#| message: false
+
+price_change = clean_names(price_change)
+
+# Ensure `nowtime` is in datetime format and `current_price` is numeric
+price_change$nowtime <- as.POSIXct(price_change$nowtime)
+price_change$current_price <- as.numeric(price_change$current_price)
+
+# Sample ggplot code to create the point graph
+ggplot(price_change, aes(x = nowtime, y = current_price, color = product_name,fill = vendor)) +
+  geom_point(alpha = 0.6) +
+  labs(x = "Time(Month)",
+       y = "Current Price",
+       color = "Vendor") +
+  facet_wrap(~ vendor, scales = "free_y") +
   theme_minimal() 
 ```
  
