@@ -39,7 +39,7 @@ Many people think that only Asians are obsessed with tea, but after the UK passe
 
 By examining the distribution of prices for green tea related products in Canada, we were able to identify differences in the pricing and stocking strategies implemented by various grocery stores. Our findings reveal that T&T offers a wider range of higher-end teas, along with a selection of lower priced options. This aligns with our initial assumption that T&T targets a significant portion of Asian consumers, who tend to favor high-quality teas. We also observed Walmart’s consistent low pricing, which reflects its strategy of offering affordable options across the board. Additionally, Loblaws employs pricing tactics such as frequent price adjustments and promotional strategies, which can be seen as attempts to attract cost-conscious consumers through price tricks.
 
-The graphing scripts in this paper are written in R [@citeR], with the tidyverse package [@tidyverse] The graphs are generated with ggplot2 [@ggplot2].Data cleaning was done in SQL [@citeSQL].
+The graphing scripts in this paper are written in R [@citeR], with the tidyverse package [@tidyverse] The graphs are generated with ggplot2 [@ggplot2]. Data cleaning was done in SQL [@citeSQL].
 
 The rest of the paper is structured as follows: in [Data](#sec-data) section we will discuss the various aspects of the data we use, how they were gathered and the variable we shall use.  In the [Results](#sec-results) section, we present the findings we observe from the data. In the [Discussion](#sec-discussion) section we will discuss the interpretation to the findings, their possible causation and limitation to this study. 
 
@@ -47,7 +47,7 @@ The rest of the paper is structured as follows: in [Data](#sec-data) section we 
 # Data {#sec-data}
 
 ## Mesurement
-The data used in this paper were obtained from the websites of various food retail companies, including Voila, T&T, Loblaws, No Frills, Metro, Galleria, Walmart Canada, Save-On-Foods. The data was gathered by using screen-scrape of website UI, starting from Feb.28 to Nov.14. This data captures the product name, units, and prices of each vendors. [@raw_data_source] This data set is designed to be sited for suitable for academic analysis on market behaviors and for legal actions. 
+The data used in this paper were obtained from the websites of various food retail companies, including Voila, T&T, Loblaws, No Frills, Metro, Galleria, Walmart Canada, Save-On-Foods. The data was gathered by using screen-scrape of website UI, starting from Feb.28 to Nov.14. This data captures the product name, units, and prices of each vendors [@raw_data_source].  This data set is designed to be sited for suitable for academic analysis on market behaviors and for legal actions. 
 
 This data has some limitations. There are missing data on certain days for certain vendors,some missing points occur on days which those specific extracts failed. While data collection for some products starts form July. This data didn't include all vendors in the markets, which may cause bias to our analysis.And as the author of the data set states, "Prices are for the "in store pickup" option, as set for a neighbourhood in Toronto.", which limits the effective range of our data to one city, or even one neighbourhood. 
 
@@ -165,9 +165,9 @@ Also the difference in naming across different vendors has also caused difficult
 ### Sources of Bias.
 The data set may have implicitly introduced source of bias in some ways. Firstly the organizer of this dataset have explicitly picked 8 vendors to collect data from. Which does not cover all of Canada's grocery market, and since the vendors examined are all major players in the Canadian retail and grocery industry, the data set may become highly unrepresentative for small private businesses. Which may skew the data, overlooking the  practices of independent or regional grocery stores that often serve different customer bases, operate on smaller scales, and follow different business models.
 
-A more comprehensive study that includes these smaller retailers is required to understand small firms that does rececive less benefit from economy of scale and may be focused to serve local residents. 
+A more comprehensive study that includes these smaller retailers is required to understand small firms that does receive less benefit from economy of scale and may be focused to serve local residents. 
 
-as it is likely that the dataset is skewed toward the most commonly sold items at major chains, which are typically mass-produced and mainstream products. And are easier to collect data and remember to include. Smaller stores often feature more niche items, locally sourced goods, or specialty products that cater to specific communities or tastes, which may not be represented in this dataset. These unique products could differ in terms of pricing, availability, and consumer demand, and excluding them would result in an incomplete understanding of the diversity in consumer preferences and retail offerings. A more comprehensive study can also foucs on including more types of good for a full analysis. 
+as it is likely that the dataset is skewed toward the most commonly sold items at major chains, which are typically mass-produced and mainstream products. And are easier to collect data and remember to include. Smaller stores often feature more niche items, locally sourced goods, or specialty products that cater to specific communities or tastes, which may not be represented in this dataset. These unique products could differ in terms of pricing, availability, and consumer demand, and excluding them would result in an incomplete understanding of the diversity in consumer preferences and retail offerings. A more comprehensive study can also focus on including more types of good for a full analysis. 
 
 
 \newpage
