@@ -10,7 +10,7 @@ author:
 thanks: "Code and data are available at: https://github.com/UTDQi/grocery_analysis"
 date: today
 date-format: long
-abstract: "This study uses canadian grocery Price data to analyzes the pricing strategies of green tea-related products across grocery stores in Canada. We finds T&T offers a mix of premium and affordable teas, targeting its Asian customer base, while Walmart maintains low prices through economies of scale. Loblaws uses dynamic pricing and promotions to attract budget-conscious consumers. These strategies reflect different approaches to catering to diverse consumer segments."
+abstract: "This study uses canadian grocery price data to analyzes the pricing strategies of green tea-related products across grocery stores in Canada. We finds T&T offers a mix of premium and affordable teas, targeting its Asian customer base, while Walmart maintains low prices through economies of scale. Loblaws uses dynamic pricing and promotions to attract budget-conscious consumers. These strategies reflect different approaches to catering to diverse consumer segments."
 format: pdf
 number-sections: true
 toc: true
@@ -24,6 +24,7 @@ bibliography: references.bib
 
 library(tidyverse)
 library(ggplot2)
+Sys.setlocale("LC_ALL", "English")
 
 
 tea_summary = read_csv(here::here("data/02-analysis_data/tea_summary.csv"))
@@ -67,7 +68,7 @@ The current price(`old_price`) is the "old price" of the product retrieved at th
 Most vendors exhibit a right-skewed distribution in green tea related product prices, with the majority priced on the lower end of the spectrum. This pattern suggests that, while there are some high-priced teas, they are relatively uncommon compared to more affordable options.
 ```{r}
 #| label: fig-PriceVsVendor
-#| fig-cap: Distribution of Average Prices by Vendor
+#| fig-cap: Distribution of Average Green Tea Related Product Prices by Vendor
 #| include: true
 #| echo: false
 #| warning: false
@@ -96,7 +97,7 @@ Loblaws (red) displays the highest price range, between $9 and $11, with more no
 
 ```{r}
 #| label: fig-ChangeInGinsengLemon
-#| fig-cap: Price Change of Lipton Ginseng Lemon Green Tea 72 Counts
+#| fig-cap: Comparing Price Change of "Lipton Ginseng Lemon Green Tea 72 Counts" Across 3 Vendors
 #| include: true
 #| echo: false
 #| warning: false
@@ -106,14 +107,14 @@ Loblaws (red) displays the highest price range, between $9 and $11, with more no
 # Ensure `nowtime` is in datetime format and `current_price` is numeric
 price_change$nowtime <- as.POSIXct(price_change$nowtime)
 price_change$current_price <- as.numeric(price_change$current_price)
+price_change$nowtime <- as.Date(price_change$nowtime)
 
-# Sample ggplot code to create the point graph
 ggplot(price_change, aes(x = nowtime, y = current_price, color = vendor)) +
   geom_point(alpha = 0.6) +
-  labs(x = "Time(Month)",
+  labs(x = "Time",
        y = "Current Price",
-       color = "Vendor") +
-  theme_minimal() 
+       color = "Vendor") + 
+  theme_minimal()
 ```
 
 
